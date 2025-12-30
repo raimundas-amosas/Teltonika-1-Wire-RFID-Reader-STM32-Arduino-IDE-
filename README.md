@@ -381,56 +381,52 @@ Because the implementation exposes raw 1-Wire behavior and UID formats, it is we
 
 ## Integration Notes
 
+### Communication and System Integration
+
 - The output UID can be easily forwarded to:
   - CAN bus,
   - RS485 / Modbus,
   - Ethernet / MQTT gateway,
   - GSM / LTE modem.
+
 - The solution is MCU-agnostic and can be ported to:
   - STM32CubeIDE,
   - bare-metal projects,
   - RTOS-based systems.
+
+### Actuators and Physical Control
+
+The RFID UID can be directly used to control physical devices such as locks, relays, and actuators.
+
+Typical integrations include:
+- relay modules for door or cabinet unlocking,
+- transistor or MOSFET drivers for solenoids and electric strikes,
+- smart locker door control mechanisms,
+- motor drivers for mechanical latching systems.
+
+Common control methods:
+- GPIO-driven relay modules,
+- low-side or high-side transistor switching,
+- opto-isolated relay boards for noisy environments.
+
+### Locking and Safety Considerations
+
+When controlling locks or actuators, the following best practices are recommended:
+- use flyback diodes when driving inductive loads,
+- separate logic and actuator power domains where possible,
+- prefer opto-isolation in industrial or automotive installations,
+- implement fail-safe behavior (locked or unlocked on power loss, depending on use case).
+
+The RFID system provides authentication, while the final access decision and actuator control remain fully under firmware control.
+
 ---
 
-## Commit History Draft
+## Notes
 
-Suggested commit progression for this repository:
+This project was developed through hands-on experimentation and real hardware testing.
 
-```
-commit 1: initial hardware investigation
-- reader power requirements
-- 1-Wire DATA voltage measurements
-- confirmation of ~5 V signaling
+If you are working on a similar integration or exploring 1-Wire RFID readers in embedded systems, feel free to use this repository as a reference or starting point.
 
-commit 2: safe GPIO interface design
-- added BSS138 level shifter
-- introduced series resistor on DATA line
-- defined open-drain rules
-
-commit 3: basic 1-Wire bit-banging
-- reset and presence detection
-- Read ROM (0x33) implementation
-- CRC8 validation
-
-commit 4: stability improvements
-- reduced redundant bus resets
-- improved timing margins
-- eliminated false no-presence events
-
-commit 5: card presence state machine
-- CARD_PRESENT / CARD_REMOVED events
-- ROM change detection
-
-commit 6: card ID analysis
-- endian experiments
-- decimal ID correlation
-- support for multiple interpretations
-
-commit 7: documentation
-- wiring explanation
-- electrical reasoning
-- protocol behavior documentation
-```
 
 ---
 
