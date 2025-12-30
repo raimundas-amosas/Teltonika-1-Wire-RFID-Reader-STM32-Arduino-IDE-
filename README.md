@@ -33,6 +33,55 @@ This project answers those questions through **controlled experiments** instead 
 
 ---
 
+## Why 1-Wire
+
+The 1-Wire interface was chosen deliberately.
+
+Many RFID solutions rely on USB readers, which introduce:
+- USB stacks and drivers,
+- CDC / HID abstractions,
+- operating system dependencies,
+- non-deterministic behavior in embedded environments.
+
+The goal of this project was the opposite:
+- direct control from a simple microcontroller,
+- no USB, no drivers, no host OS,
+- predictable timing and behavior,
+- minimal hardware and software layers.
+
+### Advantages of 1-Wire in This Context
+
+Using 1-Wire allows:
+- direct GPIO-level control from the MCU,
+- operation without any USB host capability,
+- easy integration with low-cost controllers,
+- deterministic behavior suitable for real-time systems.
+
+Only one data line plus ground is required, which simplifies:
+- wiring,
+- EMI considerations,
+- deployment in industrial or automotive environments.
+
+### Embedded-First Design
+
+The solution was designed to work with:
+- bare-metal firmware,
+- simple state machines,
+- small MCUs without USB peripherals,
+- systems where reliability and control matter more than convenience.
+
+This makes the approach suitable for:
+- access control systems,
+- smart lockers,
+- vehicle identification,
+- industrial controllers,
+- offline and headless embedded devices.
+
+In short, 1-Wire provides exactly what was needed:
+**simple hardware, full control, and no unnecessary abstraction layers.**
+
+---
+
 ## Hardware Used
 
 - **Teltonika 1-Wire RFID Reader**
