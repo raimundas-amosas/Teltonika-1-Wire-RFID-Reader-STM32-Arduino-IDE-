@@ -261,6 +261,93 @@ The final solution is:
 
 ---
 
+## Usage Examples
+
+This solution is intentionally generic and can be reused in multiple embedded and industrial scenarios where a simple, reliable RFID identification is required.
+
+### 1. Smart Lockers and Asset Locking Systems
+The solution is well suited for smart locker and asset protection systems, where a physical RFID card acts as a secure and simple authentication token.
+
+Typical use cases include:
+- parcel lockers,
+- tool and equipment lockers,
+- employee personal storage,
+- shared asset management systems.
+
+The STM32 reads the RFID card UID and can:
+- unlock a specific locker assigned to the card,
+- validate access against a centralized or local database,
+- log access events (open/close, time, user),
+- support offline operation with locally stored credentials.
+
+Due to the deterministic behavior and open-drain 1-Wire implementation, the system can be safely deployed in:
+- industrial environments,
+- public-access installations,
+- outdoor or semi-outdoor lockers.
+
+The RFID card serves as a robust alternative to PIN codes or touchscreens, reducing maintenance and improving reliability.
+
+### 2. Driver Identification in Vehicles
+The original use case for Teltonika 1-Wire RFID readers.
+
+Each RFID card represents a driver.  
+The STM32 reads the card UID and can:
+- allow or deny vehicle ignition,
+- associate trips with a specific driver,
+- log driver activity to flash memory or send it via CAN / UART / GSM.
+
+### 3. Access Control for Embedded Devices
+The reader can be used as a lightweight access control mechanism for:
+- industrial controllers,
+- machines with restricted operation,
+- service or maintenance panels.
+
+The UID can be compared against a whitelist stored in:
+- internal Flash,
+- EEPROM,
+- external memory.
+
+### 4. Time & Attendance / Presence Tracking
+By detecting `CARD_PRESENT` and `CARD_REMOVED` events, the system can:
+- register entry and exit times,
+- track working hours,
+- trigger external systems via serial, RS485, or Ethernet gateways.
+
+### 5. Secure Configuration or Service Mode
+An RFID card can act as a physical key to:
+- enter service mode,
+- unlock configuration menus,
+- enable firmware update mode.
+
+This is especially useful in headless embedded systems without displays or keyboards.
+
+### 6. Industrial or Agricultural Equipment Identification
+The system can be used to identify:
+- operators of heavy machinery,
+- authorized personnel for agricultural equipment,
+- machine-to-user binding in distributed environments.
+
+### 7. Prototyping and Reverse Engineering
+Because the implementation exposes raw 1-Wire behavior and UID formats, it is well suited for:
+- analyzing unknown RFID readers,
+- testing card formats,
+- reverse engineering legacy access systems.
+
+---
+
+## Integration Notes
+
+- The output UID can be easily forwarded to:
+  - CAN bus,
+  - RS485 / Modbus,
+  - Ethernet / MQTT gateway,
+  - GSM / LTE modem.
+- The solution is MCU-agnostic and can be ported to:
+  - STM32CubeIDE,
+  - bare-metal projects,
+  - RTOS-based systems.
+---
+
 ## Commit History Draft
 
 Suggested commit progression for this repository:
