@@ -139,6 +139,10 @@ This ensures:
   - LV → STM32 3V3
   - GND → common ground
 
+
+![Teltonika RFID reader](images/teltonika-rfid3.jpg)
+
+
 ### Data Path
 
 ```
