@@ -13,6 +13,17 @@ The project focuses on:
 This is not a generic tutorial.  
 It is an engineering write-up based on **measurement, debugging, and protocol analysis**.
 
+
+---
+
+## Quick Start
+
+1. **Hardware Setup**: Connect the components as shown in the [Wiring Diagram](#wiring-diagram).
+2. **Environment**: Install the [STM32duino core](https://github.com/stm32duino/Arduino_Core_STM32) in your Arduino IDE.
+3. **Flash**: Open the provided `.ino` file, select your **Nucleo-64** board, and upload.
+4. **Monitor**: Open the Serial Monitor at **115200 baud**.
+5. **Test**: Swipe an RFID card; you should see the hex ROM and converted decimal ID immediately.
+
 ---
 
 ## Background / Motivation
@@ -230,6 +241,15 @@ GPIO assignment:
   - Read ROM succeeds
 - Card removed:
   - Presence disappears
+
+### Expected Output (Serial Monitor)
+When a card is swiped, you should see:
+```text
+Scanning 1-Wire bus...
+Card detected!
+ROM: 01 AF 9A 4A 00 38 00 EF
+CRC: OK
+DEC32 LE: 1246404527
 
 This confirmed that the reader **only joins the 1-Wire bus while a card is present**.
 
