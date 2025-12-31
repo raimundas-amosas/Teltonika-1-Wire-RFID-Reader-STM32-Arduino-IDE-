@@ -250,7 +250,7 @@ Card detected!
 ROM: 01 AF 9A 4A 00 38 00 EF
 CRC: OK
 DEC32 LE: 1246404527
-
+```
 This confirmed that the reader **only joins the 1-Wire bus while a card is present**.
 
 ![Wiring and level shifter setup](images/teltonika-rfid2.jpg)
